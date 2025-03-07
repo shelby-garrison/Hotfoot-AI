@@ -1,0 +1,51 @@
+/* Comet Trail Container */
+.comet-trail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 10; /* Ensure it's above other elements */
+  }
+  
+  /* Comet Head */
+  .comet-trail::before {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle, gold, transparent 70%);
+    border-radius: 50%;
+    animation: comet-traverse 5s linear infinite;
+  }
+  
+  /* Comet Tail */
+  .comet-trail::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, gold, transparent);
+    transform-origin: right;
+    animation: comet-traverse 5s linear infinite, tail-direction 5s linear infinite;
+  }
+  
+  /* Keyframes for Border Traversal */
+  @keyframes comet-traverse {
+    0% { top: 0; left: 0; }
+    25% { top: 0; left: 100%; transform: translateX(-100%); }
+    50% { top: 100%; left: 100%; transform: translate(-100%, -100%); }
+    75% { top: 100%; left: 0; transform: translateY(-100%); }
+    100% { top: 0; left: 0; }
+  }
+  
+  /* Keyframes to Adjust Tail Direction */
+  @keyframes tail-direction {
+    0%, 100% { transform: rotate(0deg); }   /* Moving right */
+    25% { transform: rotate(90deg); }       /* Moving down */
+    50% { transform: rotate(180deg); }      /* Moving left */
+    75% { transform: rotate(270deg); }      /* Moving up */
+  }
+  
